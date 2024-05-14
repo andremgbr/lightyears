@@ -1,6 +1,7 @@
 #include "gameFramework/GameApplication.h"
 #include "framework/Actor.h"
 #include "framework/World.h"
+#include "config.h"
 
 ly::Application* GetApplication(){
   return new ly::GameApplication{};
@@ -9,11 +10,11 @@ ly::Application* GetApplication(){
 namespace ly{
 
 GameApplication::GameApplication()
-  :Application{600, 980, "Light Years", sf::Style::Titlebar | sf::Style::Close}{
+  :Application{200, 200, "Light Years", sf::Style::Titlebar | sf::Style::Close}{
   weak<World> newWorld = LoadWorld<World>();
   newWorld.lock()->SpawnActor<Actor>();
   actorToDestory = newWorld.lock()->SpawnActor<Actor>();
-  actorToDestory.lock()->SetTexture("/home/andre/dev/cpp/lightyears/LightYearsGame/assets/SpaceShooterRedux/PNG/playerShip1_blue.png");
+  actorToDestory.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/playerShip1_blue.png");
   counter = 0;
 }
 
