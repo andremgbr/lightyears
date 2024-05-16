@@ -28,6 +28,9 @@ private:
 
   shared<World> currentWorld;
 
+  sf::Clock mCleanCycleClock;
+  float mCleanCycleIterval;
+
 };
 
 template<typename WorldType>

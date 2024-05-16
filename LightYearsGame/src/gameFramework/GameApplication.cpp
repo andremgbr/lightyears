@@ -10,20 +10,19 @@ ly::Application* GetApplication(){
 namespace ly{
 
 GameApplication::GameApplication()
-  :Application{200, 200, "Light Years", sf::Style::Titlebar | sf::Style::Close}{
-  weak<World> newWorld = LoadWorld<World>();
+  :Application{600, 800, "Light Years", sf::Style::Titlebar | sf::Style::Close}{
+  
+    weak<World> newWorld = LoadWorld<World>();
   newWorld.lock()->SpawnActor<Actor>();
   actorToDestory = newWorld.lock()->SpawnActor<Actor>();
   actorToDestory.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/playerShip1_blue.png");
+  actorToDestory.lock()->SetActorLocation(sf::Vector2f(300.f, 490.f));
+  actorToDestory.lock()->SetActorRotation(90.f);
   counter = 0;
+
 }
 
 void GameApplication::Tick(float deltaTime){
-  counter += deltaTime;
-  if(counter > 2.f){
-    if(!actorToDestory.expired()){
-      actorToDestory.lock()->Destory();
-    }
-  }
+  
 }
 }
