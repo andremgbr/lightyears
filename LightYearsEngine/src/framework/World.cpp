@@ -1,6 +1,7 @@
 #include "framework/World.h"
 #include "framework/Core.h"
 #include "framework/Actor.h"
+#include "framework/Application.h"
 
 namespace ly{
   World::World(Application* owningApp)
@@ -17,6 +18,11 @@ void World::BeginPlayInternal(){
     mBeganPlay = true;
     BeginPlay();
   }
+}
+
+sf::Vector2u World::GetWindowSize() const
+{
+    return mOwningApp->GetWindowSize();
 }
 
 void World::BeginPlay(){

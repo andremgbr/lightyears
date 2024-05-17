@@ -2,6 +2,7 @@
 #include "framework/Core.h"
 #include "framework/AssetManager.h"
 #include "framework/MathUtility.h"
+#include "framework/World.h"
 
 namespace ly{
 Actor::Actor(World* owningWorld, const std::string& texturePath)
@@ -88,6 +89,10 @@ sf::Vector2f Actor::GetActorForwardDirection() const
 sf::Vector2f Actor::GetActorRightDirection() const
 {
     return RotationToVector(GetActorRotation() + 90.f);
+}
+sf::Vector2u Actor::GetWindowSize() const
+{
+    return mOwningWolrd->GetWindowSize();
 }
 void Actor::CenterPivot()
 {
