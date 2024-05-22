@@ -4,9 +4,11 @@
 #include "framework/Object.h"
 #include "framework/Core.h"
 
+class b2Body;
 
 namespace ly{
 class World;
+
 class Actor : public Object{
 public:
   Actor(World* owningWorld, const std::string& texturePath= "");
@@ -27,10 +29,21 @@ public:
   float GetActorRotation() const;
   sf::Vector2f GetActorForwardDirection() const;
   sf::Vector2f GetActorRightDirection() const;
+  sf::FloatRect GetActorGlobalBounds() const;
 	
   sf::Vector2u GetWindowSize() const;
 
+  World* GetWorld() const { return mOwningWolrd; };
+
+  bool IsActorOutOfWindowBounds() const;
+
+  void SetEnabledPhysics(bool enable);
+
 private:
+
+	void InitiallizePhysics();
+	void UnInitializePhysics();
+	void UpdatePhysicsBodyTransform();
 
 	void CenterPivot();
 
@@ -40,5 +53,8 @@ private:
 
   sf::Sprite mSprite;
   shared<sf::Texture> mTexture;
+  b2Body* mPhysicBody;
+
+  bool mPhysicsEnabled;
 };
 }

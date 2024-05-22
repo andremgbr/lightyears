@@ -15,10 +15,12 @@ public:
 
   virtual ~World();
 
-  template<typename ActorType>
-  weak<ActorType> SpawnActor();
+  template<typename ActorType, typename... Args>
+  weak<ActorType> SpawnActor(Args... args);
 
   sf::Vector2u GetWindowSize() const;
+
+  void CleanCycle();
 
 private:
   void BeginPlay();
@@ -32,9 +34,9 @@ private:
 
 };
 
-template<typename ActorType>
-weak<ActorType> World::SpawnActor(){
-  shared<ActorType> newActor{ new ActorType{this}};
+template<typename ActorType, typename... Args>
+weak<ActorType> World::SpawnActor(Args... args){
+  shared<ActorType> newActor{ new ActorType{this, args...}};
   mPendingActors.push_back(newActor);
   return newActor;
 

@@ -19,6 +19,7 @@ GameApplication::GameApplication()
   newWorld.lock()->SpawnActor<Actor>();
   testePlayerSpaceship = newWorld.lock()->SpawnActor<PlayerSpaceship>();
   testePlayerSpaceship.lock()->SetActorLocation(sf::Vector2f(300.f, 490.f));
+  testePlayerSpaceship.lock()->SetActorRotation(-90.f);
 
 
 }

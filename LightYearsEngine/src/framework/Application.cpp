@@ -2,6 +2,7 @@
 #include "framework/Core.h"
 #include "framework/World.h"
 #include "framework/AssetManager.h"
+#include "framework/PhysicsSystem.h"
 
 namespace ly {
 Application::Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, sf::Uint32 style)
@@ -47,9 +48,14 @@ void Application::TickInternal(float deltaTime) {
     currentWorld->TickInternal(deltaTime);
   }
 
+  PhysicsSystem::Get().Step(deltaTime);
+
   if (mCleanCycleClock.getElapsedTime().asSeconds() >= mCleanCycleIterval) {
       mCleanCycleClock.restart();
       AssetManager::Get().CleanCycle();
+      if (currentWorld) {
+          currentWorld->CleanCycle();
+      }
   }
 }
 
