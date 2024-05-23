@@ -20,5 +20,6 @@ namespace ly {
 		float mSpeed;
 
 		unique<BulletShooter> mShooter;
+
 	};
 }

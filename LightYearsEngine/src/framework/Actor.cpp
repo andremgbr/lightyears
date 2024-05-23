@@ -66,10 +66,12 @@ void Actor::Render(sf::RenderWindow& window){
 void Actor::SetActorLocation(const sf::Vector2f& newLoc)
 {
     mSprite.setPosition(newLoc);
+    UpdatePhysicsBodyTransform();
 }
 void Actor::SetActorRotation(float newRot)
 {
     mSprite.setRotation(newRot);
+    UpdatePhysicsBodyTransform();
 }
 void Actor::AddActorLocationOffset(const sf::Vector2f& offsetAmt)
 {
@@ -142,6 +144,19 @@ void Actor::SetEnabledPhysics(bool enable)
     }
 
 }
+void Actor::OnActorBeginOverlap(Actor* other)
+{
+    LOG("OverLapped");
+}
+void Actor::OnActorEndOverlap(Actor* other)
+{
+    LOG("OVerLap END");
+}
+void Actor::Destory()
+{
+    UnInitializePhysics();
+    Object::Destory();
+}
 void Actor::InitiallizePhysics()
 {
     if (!mPhysicBody) {
@@ -152,6 +167,7 @@ void Actor::UnInitializePhysics()
 {
     if (mPhysicBody) {
         PhysicsSystem::Get().RemoveListener(mPhysicBody);
+        mPhysicBody = nullptr;
     }
 }
 
