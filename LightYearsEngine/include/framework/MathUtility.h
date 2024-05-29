@@ -5,6 +5,11 @@ namespace ly {
 	sf::Vector2f RotationToVector(float rotation);
 	float DegreesToRadians(float degrees);
 	float RadiansToDegrees(float radians);
+	float LerpFloat(float a, float b, float alpha);
+	sf::Color LerpColor(const sf::Color& a, const sf::Color& b, float alpha);
+	sf::Vector2f LerpVector(const sf::Vector2f& a, const sf::Vector2f& b, float alpha);
+	float RandomRange(float min, float max);
+	sf::Vector2f RandomUnitVector();
 
 	template<typename T>
 	float GetVectorLength(const sf::Vector2<T>& vector) {

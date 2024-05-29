@@ -33,7 +33,9 @@ public:
 	
   sf::Vector2u GetWindowSize() const;
 
-  World* GetWorld() const { return mOwningWolrd; };
+  const World* GetWorld() const { return mOwningWolrd; };
+  World* GetWorld() { return mOwningWolrd; };
+
 
   bool IsActorOutOfWindowBounds() const;
 
@@ -43,6 +45,17 @@ public:
   virtual void OnActorEndOverlap(Actor* other);
 
   virtual void Destory() override;
+  static uint8 GetNeturalTeamID() { return neturalTeamID; };
+
+  void SetTeamID(uint8 teamID) { mTeamID = teamID; };
+
+  uint8 GetTeamID() const { return mTeamID; };
+  bool IsOtherHostile(Actor* other) const;
+
+  virtual void ApplyDamage(float amt);
+
+  sf::Sprite& GetSprite() { return mSprite; }
+  const sf::Sprite& GetSprite() const { return mSprite; }
 
 private:
 
@@ -61,5 +74,8 @@ private:
   b2Body* mPhysicBody;
 
   bool mPhysicsEnabled;
+
+  uint8 mTeamID;
+  const static uint8 neturalTeamID = 255;
 };
 }

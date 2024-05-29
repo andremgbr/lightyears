@@ -13,7 +13,8 @@ Actor::Actor(World* owningWorld, const std::string& texturePath)
     mHasBeganPlay{false},
      mTexture{},
      mPhysicBody{ nullptr },
-    mPhysicsEnabled{ false } {
+    mPhysicsEnabled{ false },
+    mTeamID{ GetNeturalTeamID() } {
   
   SetTexture(texturePath);
 }
@@ -146,16 +147,24 @@ void Actor::SetEnabledPhysics(bool enable)
 }
 void Actor::OnActorBeginOverlap(Actor* other)
 {
-    LOG("OverLapped");
+    
 }
 void Actor::OnActorEndOverlap(Actor* other)
 {
-    LOG("OVerLap END");
+    
 }
 void Actor::Destory()
 {
     UnInitializePhysics();
     Object::Destory();
+}
+bool Actor::IsOtherHostile(Actor* other) const
+{
+    if (GetTeamID() == GetNeturalTeamID() || other->GetTeamID() == GetNeturalTeamID()) {
+        return false;
+    }
+
+    return GetTeamID() != other->GetTeamID();
 }
 void Actor::InitiallizePhysics()
 {
@@ -187,4 +196,9 @@ void Actor::CenterPivot()
     sf::FloatRect bound = mSprite.getGlobalBounds();
     mSprite.setOrigin(bound.width / 2.f, bound.height / 2.f);
 }
+
+void Actor::ApplyDamage(float amt) {
+
+}
+
 }

@@ -24,6 +24,7 @@ GameApplication::GameApplication()
   weak<Spaceship> testeSpaceship = newWorld.lock()->SpawnActor<Spaceship>();
   testeSpaceship.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
   testeSpaceship.lock()->SetActorLocation(sf::Vector2f{ 100.f, 50.f });
+  testeSpaceship.lock()->SetTeamID(2);
   counter = 0.f;
 
 
@@ -31,10 +32,10 @@ GameApplication::GameApplication()
 
 void GameApplication::Tick(float deltaTime){
     counter += deltaTime;
-    if (counter > 10.f) {
-        if (!testePlayerSpaceship.expired()) {
-            testePlayerSpaceship.lock()->Destory();
-        }
-    }
+    //if (counter > 10.f) {
+    //    if (!testePlayerSpaceship.expired()) {
+    //        testePlayerSpaceship.lock()->Destory();
+    //    }
+    //}
 }
 }
