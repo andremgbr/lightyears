@@ -37,7 +37,7 @@ public:
   World* GetWorld() { return mOwningWolrd; };
 
 
-  bool IsActorOutOfWindowBounds() const;
+  bool IsActorOutOfWindowBounds(float allowance = 10.f) const;
 
   void SetEnabledPhysics(bool enable);
 
