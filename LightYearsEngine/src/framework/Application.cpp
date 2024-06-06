@@ -3,6 +3,7 @@
 #include "framework/World.h"
 #include "framework/AssetManager.h"
 #include "framework/PhysicsSystem.h"
+#include "framework/TimerManager.h"
 
 namespace ly {
 Application::Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, sf::Uint32 style)
@@ -47,6 +48,8 @@ void Application::TickInternal(float deltaTime) {
   if(currentWorld){
     currentWorld->TickInternal(deltaTime);
   }
+
+  TimerManager::Get().UpdateTimer(deltaTime);
 
   PhysicsSystem::Get().Step(deltaTime);
 

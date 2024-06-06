@@ -46,7 +46,6 @@ namespace ly {
 	}
 	void Spaceship::UpdateBlink(float deltaTime)
 	{
-		LOG("FOI BLINCADO tempo:%f", mBlinkTime);
 		if (mBlinkTime > 0) {
 			mBlinkTime -= deltaTime;
 			mBlinkTime = mBlinkTime > 0 ? mBlinkTime : 0.f;

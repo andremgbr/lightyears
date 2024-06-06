@@ -30,7 +30,11 @@ add_library(
     
   ${CMAKE_CURRENT_SOURCE_DIR}/include/framework/Delegate.h 
   ${CMAKE_CURRENT_SOURCE_DIR}/src/framework/Delegate.cpp
-      
+  
+    
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/framework/TimerManager.h 
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/framework/TimerManager.cpp
+
   ${CMAKE_CURRENT_SOURCE_DIR}/include/VFX/Particle.h 
   ${CMAKE_CURRENT_SOURCE_DIR}/src/VFX/Particle.cpp
 )
