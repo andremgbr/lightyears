@@ -2,8 +2,7 @@
 
 namespace ly {
 	unique<TimerManager> TimerManager::timerManager{ nullptr };
-
-	unsigned int TimerManager::timerIndexCounter = 0;
+	unsigned int TimerHandle::timerKeyCounter = 0;
 
 	void TimerManager::UpdateTimer(float deltaTime)
 	{
@@ -18,9 +17,9 @@ namespace ly {
 		}
 	}
 
-	void TimerManager::ClearTimer(unsigned int timerIndex)
+	void TimerManager::ClearTimer(TimerHandle timerHandle)
 	{
-		auto iter = mTimers.find(timerIndex);
+		auto iter = mTimers.find(timerHandle);
 		if (iter != mTimers.end()) {
 			iter->second.SetExpired();
 		}
@@ -75,6 +74,15 @@ namespace ly {
 	void Timer::SetExpired()
 	{
 		mIsExpired = true;
+	}
+
+	TimerHandle::TimerHandle()
+		:mTimerKey{ GetNextTimerKey() } {
+
+	}
+
+	bool operator==(const TimerHandle& lhs, const TimerHandle& rhs) {
+		return lhs.GetTimerKey() == rhs.GetTimerKey();
 	}
 
 }

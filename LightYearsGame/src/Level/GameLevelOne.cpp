@@ -5,6 +5,7 @@
 #include "framework/AssetManager.h"
 #include "framework/TimerManager.h"
 #include "player/PlayerSpaceship.h"
+#include "gameplay/GameStage.h"
 
 namespace ly {
 
@@ -22,13 +23,18 @@ namespace ly {
 
 	void GameLevelOne::BeginPlay()
 	{
-		timerIndex_Test = TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::TimerCallBack_Test, 3, true);
+		timerHandle_Test = TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::TimerCallBack_Test, 3, true);
 	}
 
 	void GameLevelOne::TimerCallBack_Test()
 	{
 		LOG("CallBack callded!!");
-		TimerManager::Get().ClearTimer(timerIndex_Test);
+		TimerManager::Get().ClearTimer(timerHandle_Test);
+	}
+
+	void GameLevelOne::InitGameStages()
+	{
+		AddState(shared<GameStage>{new GameStage{ this }});
 	}
 
 }

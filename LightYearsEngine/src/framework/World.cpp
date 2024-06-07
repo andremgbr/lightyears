@@ -2,13 +2,16 @@
 #include "framework/Core.h"
 #include "framework/Actor.h"
 #include "framework/Application.h"
+#include "gameplay/GameStage.h"
 
 namespace ly{
   World::World(Application* owningApp)
     : mOwningApp{owningApp},
     mBeganPlay{false},
     mActors{},
-    mPendingActors{}
+    mPendingActors{},
+    mCurrentStageIndex{-1},
+    mGameStages{}
 {
 
 }
@@ -17,6 +20,8 @@ void World::BeginPlayInternal(){
   if(!mBeganPlay){
     mBeganPlay = true;
     BeginPlay();
+    InitGameStages();
+    NextGameStage();
   }
 }
 
@@ -35,6 +40,20 @@ void World::CleanCycle()
             ++iter;
         }
     }
+
+    for (auto iter = mGameStages.begin(); iter != mGameStages.end();) {
+        if (iter->get()->IsStageFinished()) {
+            iter = mGameStages.erase(iter);
+        }
+        else {
+            ++iter;
+        }
+    }
+}
+
+void World::AddState(const shared<GameStage>& newStage)
+{
+    mGameStages.push_back(newStage);
 }
 
 void World::BeginPlay(){
@@ -43,6 +62,26 @@ void World::BeginPlay(){
 
 void World::Tick(float deltaTime){
 
+}
+
+void World::InitGameStages()
+{
+}
+
+void World::AllGameStageFinished()
+{
+}
+
+void World::NextGameStage()
+{
+    ++mCurrentStageIndex;
+    if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
+        mGameStages[mCurrentStageIndex]->onStageFinished.BindAction(GetWeakRef(), &World::NextGameStage);
+        mGameStages[mCurrentStageIndex]->StartStage();
+    }
+    else {
+        AllGameStageFinished();
+    }
 }
 
 void World::TickInternal(float deltaTime){
@@ -59,6 +98,10 @@ void World::TickInternal(float deltaTime){
       iter->get()->TickInternal(deltaTime);
       ++iter;
 
+  }
+
+  if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
+      mGameStages[mCurrentStageIndex]->TickStage(deltaTime);
   }
 
   Tick(deltaTime);
