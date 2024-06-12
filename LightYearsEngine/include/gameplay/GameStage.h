@@ -20,6 +20,6 @@ namespace ly {
 	private:
 		World* mWorld;
 		bool mStageFinished;
-		void StageFinished();
+		virtual void StageFinished();
 	};
 }

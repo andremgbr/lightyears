@@ -10,7 +10,7 @@ namespace ly{
     mBeganPlay{false},
     mActors{},
     mPendingActors{},
-    mCurrentStageIndex{-1},
+    mCurrentStage{mGameStages.end()},
     mGameStages{}
 {
 
@@ -21,7 +21,7 @@ void World::BeginPlayInternal(){
     mBeganPlay = true;
     BeginPlay();
     InitGameStages();
-    NextGameStage();
+    StartStages();
   }
 }
 
@@ -41,14 +41,6 @@ void World::CleanCycle()
         }
     }
 
-    for (auto iter = mGameStages.begin(); iter != mGameStages.end();) {
-        if (iter->get()->IsStageFinished()) {
-            iter = mGameStages.erase(iter);
-        }
-        else {
-            ++iter;
-        }
-    }
 }
 
 void World::AddState(const shared<GameStage>& newStage)
@@ -70,19 +62,27 @@ void World::InitGameStages()
 
 void World::AllGameStageFinished()
 {
+    LOG("All Stages Finished");
 }
 
 void World::NextGameStage()
 {
-    ++mCurrentStageIndex;
-    if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
-        mGameStages[mCurrentStageIndex]->onStageFinished.BindAction(GetWeakRef(), &World::NextGameStage);
-        mGameStages[mCurrentStageIndex]->StartStage();
+    mCurrentStage = mGameStages.erase(mCurrentStage);
+    if (mCurrentStage != mGameStages.end()) {
+        mCurrentStage->get()->StartStage();
+        mCurrentStage->get()->onStageFinished.BindAction(GetWeakRef(), &World::NextGameStage);
     }
     else {
         AllGameStageFinished();
     }
 }
+
+void World::StartStages()
+{
+    mCurrentStage = mGameStages.begin();
+    mCurrentStage->get()->StartStage();
+    mCurrentStage->get()->onStageFinished.BindAction(GetWeakRef(), &World::NextGameStage);
+;}
 
 void World::TickInternal(float deltaTime){
 
@@ -100,9 +100,9 @@ void World::TickInternal(float deltaTime){
 
   }
 
-  if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
-      mGameStages[mCurrentStageIndex]->TickStage(deltaTime);
-  }
+  if (mCurrentStage != mGameStages.end()) {
+      mCurrentStage->get()->TickStage(deltaTime);
+    }
 
   Tick(deltaTime);
 }
