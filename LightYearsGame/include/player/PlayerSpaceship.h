@@ -3,7 +3,7 @@
 #include "SFML/Graphics.hpp"
 
 namespace ly {
-	class BulletShooter;
+	class Shooter;
 	class PlayerSpaceship : public Spaceship {
 	public:
 		PlayerSpaceship(World* owningWorld, const std::string& path = "SpaceShooterRedux/PNG/playerShip1_blue.png");
@@ -19,7 +19,7 @@ namespace ly {
 		sf::Vector2f mMoveInput;
 		float mSpeed;
 
-		unique<BulletShooter> mShooter;
+		unique<Shooter> mShooter;
 
 	};
 }

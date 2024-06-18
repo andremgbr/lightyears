@@ -12,6 +12,13 @@ add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
 
   ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Shooter.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Shooter.cpp
+  
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/ThreeWayShooter.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/ThreeWayShooter.cpp
+
+    
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/FrontalWiper.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/FrontalWiper.cpp
 
   ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Bullet.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Bullet.cpp
@@ -22,6 +29,9 @@ add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
 
   ${CMAKE_CURRENT_SOURCE_DIR}/include/player/PlayerSpaceship.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/player/PlayerSpaceship.cpp
+
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/player/Reward.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/player/Reward.cpp
   
   ${CMAKE_CURRENT_SOURCE_DIR}/include/VFX/Explosion.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/VFX/Explosion.cpp
@@ -43,6 +53,17 @@ add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
 
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/Hexagon.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/Hexagon.cpp
+
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/HexagonStage.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/HexagonStage.cpp
+
+
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/UFO.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/UFO.cpp
+
+
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/UFOStage.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/UFOStage.cpp
 
   ${CMAKE_CURRENT_SOURCE_DIR}/include/Level/GameLevelOne.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/Level/GameLevelOne.cpp
