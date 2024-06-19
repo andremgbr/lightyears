@@ -3,6 +3,7 @@
 
 #include "framework/Object.h"
 #include "framework/Core.h"
+#include "framework/Delegate.h"
 
 class b2Body;
 
@@ -56,6 +57,8 @@ public:
 
   sf::Sprite& GetSprite() { return mSprite; }
   const sf::Sprite& GetSprite() const { return mSprite; }
+
+  Delegate<Actor*> onActorDestoryed;
 
 private:
 

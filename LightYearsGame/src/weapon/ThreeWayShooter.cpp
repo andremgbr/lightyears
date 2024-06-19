@@ -5,8 +5,21 @@ namespace ly {
 		: Shooter{ owner },
 		mShooterLeft{ owner, cooldownTimer, localOffset + sf::Vector2f{10,-10}, -30.f, "SpaceShooterRedux/PNG/Lasers/laserRed01.png"},
 		mShooterMid{ owner, cooldownTimer, localOffset, 0.f, "SpaceShooterRedux/PNG/Lasers/laserRed01.png" },
-		mShooterRight{ owner, cooldownTimer, localOffset + sf::Vector2f{10,10}, 30.f, "SpaceShooterRedux/PNG/Lasers/laserRed01.png" } {
+		mShooterRight{ owner, cooldownTimer, localOffset + sf::Vector2f{10,10}, 30.f, "SpaceShooterRedux/PNG/Lasers/laserRed01.png" },
+		mTopLevelShooterLeft{ owner, cooldownTimer, localOffset + sf::Vector2f{10,10}, 15.f, "SpaceShooterRedux/PNG/Lasers/laserRed01.png" },
+		mTopLevelShooterRight{ owner, cooldownTimer, localOffset + sf::Vector2f{10,-10}, -15.f, "SpaceShooterRedux/PNG/Lasers/laserRed01.png" } {
 
+	}
+
+	void ThreeWayShooter::IncrementLevel(int amt)
+	{
+		Shooter::IncrementLevel(amt);
+		mShooterLeft.IncrementLevel(amt);
+		mShooterMid.IncrementLevel(amt);
+		mShooterRight.IncrementLevel(amt);
+
+		mTopLevelShooterLeft.IncrementLevel(amt);
+		mTopLevelShooterRight.IncrementLevel(amt);
 	}
 
 	void ThreeWayShooter::ShootImpl()
@@ -14,6 +27,11 @@ namespace ly {
 		mShooterLeft.Shoot();
 		mShooterMid.Shoot();
 		mShooterRight.Shoot();
+
+		if (GetCurrentLevel() == GetMaxLevel()) {
+			mTopLevelShooterLeft.Shoot();
+			mTopLevelShooterRight.Shoot();
+		}
 	}
 
 }

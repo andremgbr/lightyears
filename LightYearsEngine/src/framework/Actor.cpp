@@ -156,6 +156,7 @@ void Actor::OnActorEndOverlap(Actor* other)
 void Actor::Destory()
 {
     UnInitializePhysics();
+    onActorDestoryed.Broadcast(this);
     Object::Destory();
 }
 bool Actor::IsOtherHostile(Actor* other) const
