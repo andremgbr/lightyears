@@ -26,6 +26,9 @@ void Application::Run() {
       if (windowEvent.type == sf::Event::EventType::Closed) {
         mWindow.close();
       }
+      else {
+          DispathEvent(windowEvent);
+      }
     }
     float frameDeltaTime = mTickClock.restart().asSeconds();
     accumulatedTime += frameDeltaTime;
@@ -40,6 +43,13 @@ void Application::Run() {
 sf::Vector2u Application::GetWindowSize() const
 {
     return mWindow.getSize();
+}
+
+bool Application::DispathEvent(const sf::Event& event)
+{
+    if (currentWorld) {
+        return currentWorld->DispathEvent(event);
+    }
 }
 
 void Application::TickInternal(float deltaTime) {
