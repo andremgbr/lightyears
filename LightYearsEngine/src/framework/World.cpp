@@ -54,6 +54,8 @@ bool World::DispathEvent(const sf::Event& event)
     if (mHUD) {
         return mHUD->HandleEvent(event);
     }
+
+    return false;
 }
 
 void World::BeginPlay(){
@@ -122,8 +124,11 @@ void World::TickInternal(float deltaTime){
 
   Tick(deltaTime);
 
-  if (mHUD && mHUD->HasInit()) {
-      mHUD->NativeInit(mOwningApp->GetWindow());
+  if (mHUD) {
+      if (!mHUD->HasInit())
+        mHUD->NativeInit(mOwningApp->GetWindow());
+
+      mHUD->Tick(deltaTime);
   }
 
 }

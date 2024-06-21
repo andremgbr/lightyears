@@ -5,7 +5,7 @@
 #include "widgets/Widget.h"
 
 namespace ly {
-	class TextWidget : Widget {
+	class TextWidget : public Widget {
 	public:
 		TextWidget(const std::string& textStr,
 			const std::string& fontPath = "/SpaceShooterRedux/Bonus/kenvector_future.ttf",

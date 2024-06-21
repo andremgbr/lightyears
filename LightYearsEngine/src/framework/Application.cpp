@@ -50,6 +50,7 @@ bool Application::DispathEvent(const sf::Event& event)
     if (currentWorld) {
         return currentWorld->DispathEvent(event);
     }
+    return false;
 }
 
 void Application::TickInternal(float deltaTime) {

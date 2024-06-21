@@ -53,6 +53,10 @@ add_library(
         
   ${CMAKE_CURRENT_SOURCE_DIR}/include/widgets/TextWidget.h 
   ${CMAKE_CURRENT_SOURCE_DIR}/src/widgets/TextWidget.cpp
+
+        
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/widgets/ValueGuage.h 
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/widgets/ValueGuage.cpp
 )
 
 target_include_directories(${LIGHT_YEARS_ENGINE_TARGET_NAME}
