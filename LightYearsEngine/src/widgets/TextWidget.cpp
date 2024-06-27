@@ -13,9 +13,14 @@ namespace ly {
 		mText.setString(newString);
 	}
 
-	void TextWidget::SetSize(unsigned int newSize)
+	void TextWidget::SetTextSize(unsigned int newSize)
 	{
 		mText.setCharacterSize(newSize);
+	}
+
+	sf::FloatRect TextWidget::GetBound() const
+	{
+		return mText.getGlobalBounds();
 	}
 
 	void TextWidget::LocationUpdated(const sf::Vector2f& newLocation)

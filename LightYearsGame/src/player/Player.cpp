@@ -22,6 +22,7 @@ namespace ly {
             return mCurrentPlayerSpaceship;
         }
         else {
+            mCurrentPlayerSpaceship = weak<PlayerSpaceship>{};
             onLifeExhausted.Broadcast();
         }
         return weak<PlayerSpaceship>{};
@@ -36,7 +37,7 @@ namespace ly {
     void Player::AddScore(unsigned int amt)
     {
         if (amt > 0) {
-            mScore = amt;
+            mScore += amt;
             onScoreChange.Broadcast(mScore);
         }
     }

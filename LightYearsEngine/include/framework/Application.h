@@ -17,6 +17,7 @@ public:
   sf::RenderWindow& GetWindow() { return mWindow; }
   const sf::RenderWindow& GetWindow() const { return mWindow; }
 
+  void QuitApplication();
 private:
 	bool DispathEvent(const sf::Event& event);
   void TickInternal(float deltaTime);    
@@ -30,6 +31,7 @@ private:
   sf::Clock mTickClock;
 
   shared<World> currentWorld;
+  shared<World> mPendingWorld;
 
   sf::Clock mCleanCycleClock;
   float mCleanCycleIterval;
@@ -39,8 +41,8 @@ private:
 template<typename WorldType>
 weak<WorldType> Application::LoadWorld(){
   shared<WorldType> newWorld{new WorldType{this}};
-  currentWorld = newWorld;
-  currentWorld->BeginPlayInternal();
+  mPendingWorld = newWorld;
+  //mPendingWorld->BeginPlayInternal();
   return newWorld;
 }
 

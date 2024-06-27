@@ -57,6 +57,13 @@ add_library(
         
   ${CMAKE_CURRENT_SOURCE_DIR}/include/widgets/ValueGuage.h 
   ${CMAKE_CURRENT_SOURCE_DIR}/src/widgets/ValueGuage.cpp
+          
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/widgets/ImageWidget.h 
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/widgets/ImageWidget.cpp
+
+            
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/widgets/Button.h 
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/widgets/Button.cpp
 )
 
 target_include_directories(${LIGHT_YEARS_ENGINE_TARGET_NAME}

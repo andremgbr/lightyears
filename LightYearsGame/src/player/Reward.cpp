@@ -3,6 +3,7 @@
 #include "weapon/ThreeWayShooter.h"
 #include "weapon/FrontalWiper.h"
 #include "framework/World.h"
+#include "player/PlayerManager.h"
 
 namespace ly {
 	Reward::Reward(World* world, const std::string& texturePath, RewardFunc rewardFunc, float speed) 
@@ -26,12 +27,18 @@ namespace ly {
 
 	void Reward::OnActorBeginOverlap(Actor* otherActor)
 	{
-		//TODO: clean up casting.
-		PlayerSpaceship* playerSpaceship = dynamic_cast<PlayerSpaceship*>(otherActor);
-		if (playerSpaceship != nullptr && !playerSpaceship->IsPendingDestory()) {
-			mRewardFunc(playerSpaceship);
+		if (!otherActor || otherActor->IsPendingDestory()) return;
+
+		if (!PlayerManager::Get().GetPlayer()) return;
+
+		weak<PlayerSpaceship> playerSpaceship = PlayerManager::Get().GetPlayer()->GetCurrentSpaceship();
+		if (playerSpaceship.expired() || playerSpaceship.lock()->IsPendingDestory()) return;
+
+		if (playerSpaceship.lock()->GetUniqueID() == otherActor->GetUniqueID()) {
+			mRewardFunc(playerSpaceship.lock().get());
 			Destory();
 		}
+
 	}
 
 	weak<Reward> CreateHealthReward(World* world)
@@ -47,6 +54,11 @@ namespace ly {
 	weak<Reward> CreateFrontalWiperReward(World* world)
 	{
 		return CreateReward(world, "SpaceShooterRedux/PNG/pickups/front_row_shooter_pickup.png", RewardFrontalWiper);
+	}
+
+	weak<Reward> CreateLifeReward(World* world)
+	{
+		return CreateReward(world, "SpaceShooterRedux/PNG/pickups/playerLife1_blue.png", RewardLife);
 	}
 
 	weak<Reward> CreateReward(World* world, const std::string& texturePath, RewardFunc rewardFunc)
@@ -75,6 +87,13 @@ namespace ly {
 		if (player && !player->IsPendingDestory()) {
 			player->SetShooter(unique<Shooter>{new FrontalWiper{ player, 0.4f, {50.f, 0.f} }});
 		}
+	}
+
+	void RewardLife(PlayerSpaceship* player)
+	{
+		if (!PlayerManager::Get().GetPlayer()) return;
+
+		PlayerManager::Get().GetPlayer()->AddLifeCount(1);
 	}
 
 }

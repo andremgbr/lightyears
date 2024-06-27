@@ -14,6 +14,7 @@
 #include "Enemy/UFOStage.h"
 #include "player/PlayerManager.h"
 #include "widgets/GamePlayHUD.h"
+#include "Enemy/ChaosStage.h"
 
 namespace ly {
 
@@ -25,7 +26,7 @@ namespace ly {
 
 	void GameLevelOne::BeginPlay()
 	{
-		Player newPlayer = PlayerManager::Get().CreateNewPlayer();
+		Player& newPlayer = PlayerManager::Get().CreateNewPlayer();
 		mPlayerSpaceship = newPlayer.SpawnSpaceship(this);
 		mPlayerSpaceship.lock()->onActorDestoryed.BindAction(GetWeakRef(), &GameLevelOne::PlayerSpaceshipDestroyed);
 		mGamePlayHUD = SpawnHUD<GamePlayHUD>();
@@ -45,8 +46,7 @@ namespace ly {
 
 	void GameLevelOne::InitGameStages()
 	{
-		AddState(shared<WaitStage>{new WaitStage{ this, 5.f }});
-		AddState(shared<UFOStage>{new UFOStage{ this }});
+		AddState(shared<ChaosStage>{new ChaosStage{ this }});
 
 		AddState(shared<WaitStage>{new WaitStage{ this, 5.f }});
 		AddState(shared<VanguardStage>{new VanguardStage{ this }});
@@ -56,6 +56,9 @@ namespace ly {
 
 		AddState(shared<WaitStage>{new WaitStage{ this, 15.f }});
 		AddState(shared<HexagonStage>{new HexagonStage{ this }});
+
+		AddState(shared<WaitStage>{new WaitStage{ this, 5.f }});
+		AddState(shared<UFOStage>{new UFOStage{ this }});
 	}
 
 	void GameLevelOne::GameOver()

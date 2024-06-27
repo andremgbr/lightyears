@@ -12,8 +12,9 @@ namespace ly {
 			unsigned int characterSize = 10);
 
 		void SetString(const std::string& newString);
-		void SetSize(unsigned int newSize);
+		void SetTextSize(unsigned int newSize);
 
+		virtual sf::FloatRect GetBound() const;
 
 	private:
 		virtual void LocationUpdated(const sf::Vector2f& newLocation) override;

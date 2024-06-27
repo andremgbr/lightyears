@@ -15,8 +15,12 @@ public:
   weak<Object> GetWeakRef();
   weak<const Object> GetWeakRef() const;
   Delegate<Object*> onDestory;
-
+  unsigned int GetUniqueID() const { return mUniqueID; };
 private:
   bool mIsPendingDestory;
+  unsigned int mUniqueID;
+
+  static unsigned int uniqueIDCounter;
+  static unsigned int GetNextAvaliableID();
 };
 }

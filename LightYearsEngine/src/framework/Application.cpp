@@ -24,7 +24,7 @@ void Application::Run() {
     sf::Event windowEvent;
     while (mWindow.pollEvent(windowEvent)) {
       if (windowEvent.type == sf::Event::EventType::Closed) {
-        mWindow.close();
+          QuitApplication();
       }
       else {
           DispathEvent(windowEvent);
@@ -71,6 +71,12 @@ void Application::TickInternal(float deltaTime) {
           currentWorld->CleanCycle();
       }
   }
+
+  if (mPendingWorld && mPendingWorld != currentWorld) {
+      currentWorld = mPendingWorld;
+      currentWorld->BeginPlayInternal();
+  }
+
 }
 
 void Application::RenderInternal() {
@@ -89,4 +95,9 @@ void Application::Tick(float deltaTime) {
   //std::cout << "ticking at framerate: " << 1.f / deltaTime << std::endl;
  // LOG("ticking at framerate: %f", 1.f / deltaTime );
 }
+
+void Application::QuitApplication() {
+    mWindow.close();
+}
+
 } // namespace ly
