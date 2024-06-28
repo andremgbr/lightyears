@@ -11,6 +11,17 @@ namespace ly {
 
 	}
 
+	void ThreeWayShooter::SetCurrentLevel(int amt)
+	{
+		Shooter::SetCurrentLevel(amt);
+		mShooterLeft.SetCurrentLevel(amt);
+		mShooterMid.SetCurrentLevel(amt);
+		mShooterRight.SetCurrentLevel(amt);
+
+		mTopLevelShooterLeft.SetCurrentLevel(amt);
+		mTopLevelShooterRight.SetCurrentLevel(amt);
+	}
+
 	void ThreeWayShooter::IncrementLevel(int amt)
 	{
 		Shooter::IncrementLevel(amt);

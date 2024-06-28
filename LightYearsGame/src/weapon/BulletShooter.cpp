@@ -28,6 +28,7 @@ namespace ly {
 		mBulletTexturePath = bulletTexturePath;
 	}
 
+
 	void BulletShooter::IncrementLevel(int amt)
 	{
 		Shooter::IncrementLevel(amt);

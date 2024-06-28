@@ -14,6 +14,7 @@ namespace ly {
 		int GetCurrentLevel() const { return mCurrentLevel; }
 		int GetMaxLevel() const { return mMaxLevel; }
 
+		virtual void SetCurrentLevel(int level);
 		virtual void IncrementLevel(int amt = 1);
 
 	protected:

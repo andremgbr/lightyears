@@ -15,6 +15,7 @@
 #include "player/PlayerManager.h"
 #include "widgets/GamePlayHUD.h"
 #include "Enemy/ChaosStage.h"
+#include "Enemy/BossStage.h"
 
 namespace ly {
 
@@ -46,7 +47,8 @@ namespace ly {
 
 	void GameLevelOne::InitGameStages()
 	{
-		AddState(shared<ChaosStage>{new ChaosStage{ this }});
+
+		AddState(shared<BossStage>{new BossStage{ this }});
 
 		AddState(shared<WaitStage>{new WaitStage{ this, 5.f }});
 		AddState(shared<VanguardStage>{new VanguardStage{ this }});
@@ -59,6 +61,9 @@ namespace ly {
 
 		AddState(shared<WaitStage>{new WaitStage{ this, 5.f }});
 		AddState(shared<UFOStage>{new UFOStage{ this }});
+
+		AddState(shared<WaitStage>{new WaitStage{ this, 5.f }});
+		AddState(shared<ChaosStage>{new ChaosStage{ this }});
 	}
 
 	void GameLevelOne::GameOver()

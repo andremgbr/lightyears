@@ -10,6 +10,7 @@ namespace ly{
 			const sf::Vector2f& localOffset = { 0.f, 0.f },
 			float width = 60.f);
 
+		virtual void SetCurrentLevel(int amt)override;
 		virtual void IncrementLevel(int amt = 1) override;
 
 	private:

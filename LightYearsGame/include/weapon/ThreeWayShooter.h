@@ -15,6 +15,7 @@ namespace ly {
 		BulletShooter mTopLevelShooterLeft;
 		BulletShooter mTopLevelShooterRight;
 
+		virtual void SetCurrentLevel(int amt) override;
 		virtual void IncrementLevel(int amt = 1) override;
 
 	private :
