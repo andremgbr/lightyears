@@ -22,6 +22,13 @@ add_library(
   ${CMAKE_CURRENT_SOURCE_DIR}/src/framework/World.cpp 
 
 
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/framework/BackdropActor.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/framework/BackdropActor.cpp 
+
+  
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/framework/BackgroundLayer.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/framework/BackgroundLayer.cpp 
+
   ${CMAKE_CURRENT_SOURCE_DIR}/include/framework/PhysicsSystem.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/framework/PhysicsSystem.cpp 
   

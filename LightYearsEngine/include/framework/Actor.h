@@ -20,7 +20,7 @@ public:
   virtual void Tick(float deltaTime);
   void TickInternal(float deltaTime);
   void SetTexture(const std::string& texturePath);
-  void Render(sf::RenderWindow& window);
+  virtual void Render(sf::RenderWindow& window);
 
   void SetActorLocation(const sf::Vector2f& newLoc);
   void SetActorRotation(float newRot);
@@ -59,6 +59,7 @@ public:
   const sf::Sprite& GetSprite() const { return mSprite; }
 
   Delegate<Actor*> onActorDestoryed;
+  void SetTextureRepeated(bool repeated);
 
 private:
 

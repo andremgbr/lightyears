@@ -168,6 +168,10 @@ bool Actor::IsOtherHostile(Actor* other) const
 
     return GetTeamID() != other->GetTeamID();
 }
+void Actor::SetTextureRepeated(bool repeated)
+{
+    mTexture->setRepeated(repeated);
+}
 void Actor::InitiallizePhysics()
 {
     if (!mPhysicBody) {

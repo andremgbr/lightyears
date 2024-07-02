@@ -24,7 +24,7 @@ namespace ly {
 		RotationUpdated(newRotation);
 	}
 
-	void Widget::SetVisiblity(bool newVisibility)
+	void Widget::SetVisibility(bool newVisibility)
 	{
 		mIsVisible = newVisibility;
 	}

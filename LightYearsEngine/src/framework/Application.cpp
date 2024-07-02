@@ -74,6 +74,8 @@ void Application::TickInternal(float deltaTime) {
 
   if (mPendingWorld && mPendingWorld != currentWorld) {
       currentWorld = mPendingWorld;
+
+      PhysicsSystem::Get().Cleanup();
       currentWorld->BeginPlayInternal();
   }
 

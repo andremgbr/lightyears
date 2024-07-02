@@ -15,6 +15,11 @@ namespace ly {
 		virtual void Tick(float deltaTime);
 		virtual bool HandleEvent(const sf::Event& event) override;
 
+		void GameFinished(bool playerWon);
+
+		Delegate<> onRestartBtnClicked;
+		Delegate<> onQuitBtnClicked;
+
 	private:
 		virtual void Init(const sf::RenderWindow& windowRef) override;
 		void PlayerHealthUpdated(float amt, float currentHealth, float maxHealth);
@@ -23,6 +28,10 @@ namespace ly {
 		void RefreshHealthBar();
 		void ConnectPlayerStatus();
 		void PlayerSpaceshipDestoryed(Actor* actor);
+
+		void RestartButtonCliked();
+		void QuitButtonCliked();
+
 		TextWidget mFrameRateText;
 		ImageWidget mPlayerLifeIcon;
 		TextWidget mPlayerLifeText;
@@ -36,5 +45,13 @@ namespace ly {
 		float mCriticalThreshold;
 
 		float mWidgetSpacing;
+
+		TextWidget mWinLoseText;
+		TextWidget mFinalScoreText;
+		Button mRestartButton;
+		Button mQuitButton;
+
+		sf::Vector2u mWindowSize;
+
 	};
 }
